@@ -1,0 +1,545 @@
+\documentclass{report}
+\input{npreamble}
+
+\title{\Huge{Harvard CS50W}\\Introduction à Python}
+\author{\huge{Franz Girardin}}
+\date{May $8^{th}$ 2023}
+\usepackage{framed}
+
+%====================================================================
+
+%====================================================================
+\begin{document}
+\maketitle
+
+\newpage
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+\pagebreak
+%====================================================================
+% 
+%====================================================================
+\chapter{Création de fichier Python}
+
+\begin{EExample*}{}{}
+\begin{lstlisting}[style=PythonDraculaWhite]
+	print("Hello World") 
+\end{lstlisting}
+\end{EExample*}
+\noindent La fonction \entouree[gray]{\texttt{\footnotesize{print()}}} prend un l'argument entre parenthèse et 
+\textit{l'affiche en ligne de commande}. On enregistre un fichier avec l'extension 
+\entouree[gray]{\texttt{\footnotesize{.py}}}. Pour lancer un programma Python, on navigue verse le répertoire
+contenant le fichier et on tape \entouree[gray]{\texttt{\footnotesize{python nomFichier.py}}}. Lorsqu'on lance cette commande, un interprète lie le fichier ligne par ligne et l'exécute en temps réel.  
+%====================================================================
+% 
+%====================================================================
+\chapter{Variables et types}
+\begin{Syntaxe*}{}{}
+La création de variable suit la syntaxe suivante : \entouree[gray]{\texttt{\footnotesize{nomVariable = valeur}}}
+\end{Syntaxe*}
+
+\begin{EExample*}{Création de varibles}{}
+\begin{lstlisting}[style=PythonDraculaWhite]
+	a = 28
+    b = 1.5
+    c = "Hello!"
+    d = True
+    e = None
+\end{lstlisting}
+\end{EExample*}
+
+\begin{table}[H]
+		\caption {Principaux types primtifs Python}
+
+	\begin{center}
+		\begin{tabular}{l|l}
+
+	\arrayrulecolor{blue}\hline
+	\rowcolor{lightBlue}
+	\textcolor{myb}{\bfseries\fontfamily{lmss}\selectfont{Type}} & 
+	\textcolor{myb}{\bfseries\fontfamily{lmss}\selectfont{Description}}
+	\\
+	\hline
+	\arrayrulecolor{black}
+	\texttt{\footnotesize{int}} & \footnotesize\textit{\texttt{Un entier}}
+	\\
+	\hline
+	\texttt{\footnotesize{float}} & \footnotesize\textit{\texttt{Un nombre décimal}}
+	\\
+	\hline
+	\texttt{\footnotesize{chr}} & \footnotesize\textit{\texttt{A simple caractère}}
+	\\
+	\hline
+	\hline
+	\texttt{\footnotesize{str}} & \footnotesize\textit{\texttt{Une chaîne de caractère}}
+	\\
+	\hline	
+	\hline
+	\texttt{\footnotesize{bool}} & 
+	\footnotesize\textit{\texttt{Une valeur qui est soit}} \entouree[gray]{\texttt{\footnotesize{vrai}}}
+	\footnotesize\textit{\texttt{ou}} \entouree[gray]{\texttt{\footnotesize{fausse}}} 
+	\\
+	\hline	
+	\hline
+	\texttt{\footnotesize{chr}} & \footnotesize\textit{\texttt{A simple caractère}}
+	\\
+	\hline	
+
+	\end{tabular}
+	\end{center}
+\end{table}
+
+
+
+
+\begin{EExample*}{Entrée d'utilisateur}{}
+\begin{lstlisting}[style=PythonDraculaWhite]
+	# Ce programme prends comme entree le nom de l'utilisateur et l'imprime en ligne de commande
+	name = input("Name: ")
+    print("Hello, " + name)
+	# On utilise la fonction input() pour enregistre l'entree
+\end{lstlisting}
+\end{EExample*}
+%====================================================================
+% 
+%====================================================================
+
+
+\section{Formater une chaîne de caractère}
+\begin{Syntaxe*}{Générer des \textit{fString}}{}
+	On utilise la syntaxe \entouree[gray]{\texttt{\footnotesize{f"Expression \{variable\}" }}} pour concaténer une chaîne de caractère existante à la chaîne correspondante d'une variable.
+\end{Syntaxe*}
+
+\begin{EExample*}{Concaténation par \textit{fString}}{}
+\begin{lstlisting}[style=PythonDraculaWhite]
+	# Methode f string.
+	print(f"Hello, {input("Name: ")}")
+
+	# Methode classique
+	print("Hello, " + name)
+\end{lstlisting}
+\end{EExample*}
+
+
+
+\section{Conditions}
+\begin{Syntaxe*}{Assertions conditionnelles}{}
+Elles sont introduites par les mots clés \entouree[gray]{\texttt{\footnotesize{if}}} 
+\entouree[gray]{\texttt{\footnotesize{elif}}} \entouree[gray]{\texttt{\footnotesize{else}}} suivit de deux points
+\entouree[gray]{\texttt{\footnotesize{:}}}. L'indentation indique que \textit{l'expression suivante sera évaluée
+à} \entouree[gray]{\texttt{\footnotesize{True}}} ou \entouree[gray]{\texttt{\footnotesize{False}}}
+\end{Syntaxe*}
+
+\begin{EExample*}{Assertions conditionnelles}{}
+	\begin{lstlisting}[style=PythonDraculaWhite]
+# Si on n'avait pas convertit l'entree en entier, l'interpretteur aurait lance une exception. 	
+num = int(input("Number: "))
+if num > 0:
+    print("Number is positive")
+elif num < 0:
+    print("Number is negative")
+else:
+    print("Number is 0")
+	\end{lstlisting}
+\end{EExample*}
+
+
+\section{Séquences}
+\begin{DefG*}{Séquence Mutable}{}
+	On dit qu'une séquence est mutable lorsqu'il est possible de changer les éléments individuels de cette 
+	\textit{séquence} après sa création. 
+\end{DefG*}
+\begin{DefG*}{Séquence ordonnée}{}
+	Séquence dans laquelle l'ordre des éléments est important. 
+\end{DefG*}
+
+
+\begin{note}
+Les chaîne de caractères sont \textbf{ordonnées} et \textbf{immuables}
+\end{note}
+\begin{EExample*}{Accéder à un caractère}{}
+	\begin{lstlisting}[style=PythonDraculaWhite]
+		# On peut acceder a un caractere en specifiant la position de celui-ci par rapport la variable
+		name = "Harry"
+        print(name[0]) # Renvoit "H"
+        print(name[1]) # Renvoit "a"
+
+	\end{lstlisting}
+\end{EExample*}
+
+
+\section{Listes}
+\begin{DefG*}{Liste Python}{}
+	Structure de données qui nous permet \textit{d'enregistrer n'importe quel type}. Une liste est contenu par \entouree[gray]{\texttt{\footnotesize{[...]}}}. 
+\end{DefG*}
+
+\begin{EExample*}{Création de liste}{}
+\begin{lstlisting}[style=PythonDraculaWhite]
+
+names = ["Harry", "Ron", "Hermione"]
+# Imprime la liste entiere 
+print(names)
+# Imprime le second element de la liste
+print(names[1])
+# Ajoute un nouveau nom a la liste
+names.append("Draco")
+# Organise la liste en ordre alphabetique
+names.sort()
+# Imprime la nouvelle liste
+print(names)
+\end{lstlisting}
+\end{EExample*}
+\begin{note}
+Les listes sont \textbf{ordonnées} et \textbf{mutables}.
+\end{note}
+
+
+
+\section{Tuples}
+\begin{DefG*}{Tuples}{}
+	Structure de données généralement utilisée pour enregistrer \textit{deux ou trois types de valeurs}—des coordonnées par exemple.
+\end{DefG*}
+\begin{EExample*}{Création d'un tuple}{}
+\begin{lstlisting}[style=PythonDraculaWhite]
+# On l'utilise ici pour creer un systeme de coordonees 
+point = (12.5, 10.6)
+\end{lstlisting}
+\end{EExample*}
+\begin{note}
+Les tuples sont \textbf{ordonnés} et \textbf{immuables}.
+\end{note}
+
+
+
+
+\section{Ensembles}	
+\begin{DefG*}{Ensemble}{}
+	Un ensemble est un types où une valeur \textit{ne peut être enregistré plus d'une fois}.
+\end{DefG*}
+
+\begin{EExample*}{Manipulation des ensembles}{}
+\begin{lstlisting}[style=PythonDraculaWhite]
+# Cree un ensemble vide
+s = set()
+
+# Ajoute des elements dans l'ensemble via la fonction add().
+s.add(1)
+s.add(2)
+s.add(3)
+s.add(4)
+s.add(3)
+s.add(1)
+
+# Retire la valeur 2 de l'ensemble.
+s.remove(2)
+
+# Imprime l'ensemble
+print(s)
+
+# Determine et affiche la taille de l'ensemble
+print(f"The set has {len(s)} elements.")
+
+""" Ceci est un commentaire de plusieurs lignes en Python
+Output:
+{1, 3, 4}
+The set has 3 elements.
+"""
+\end{lstlisting}
+\end{EExample*}
+
+
+\section{Dictionnaires}
+\begin{DefG*}{Dictionnaire}{}
+Ensemble de \entouree[gray]{\texttt{\footnotesize{clé:valeur}}} ; pour chaque clée, il y a une valeur correspondante. 
+\end{DefG*}
+\begin{codeEx*}{Création de dictionnaire}{}
+\begin{lstlisting}[style=PythonDraculaWhite]
+# Definit un dictionnaire
+houses = {"Harry": "Gryffindor", "Draco": "Slytherin"}
+
+# Imprime la maison a laquellle Harry apparient. 
+print(houses["Harry"])
+
+# Ajoute une valeur au dictionnaire. 
+houses["Hermione"] = "Gryffindor"
+
+# Imprime la maison a laquelle Hermione appartient.  
+print(houses["Hermione"])
+
+""" Output:
+Gryffindor
+Gryffindor
+"""
+\end{lstlisting}
+\end{codeEx*}
+\begin{note}
+Les dictionnaires \entouree[gray]{\texttt{\footnotesize{non ordonnées}}} et \entouree[gray]{\texttt{\footnotesize{mutables}}}
+\end{note}
+
+
+\section{Boucles}
+\begin{DefG*}{}{}
+Utilisé pour itérer sur une séquence d'élément en appliquant un bloc d'instructions. 
+\end{DefG*}
+
+\begin{EExample*}{Utilisation de boucle for}{}
+\begin{lstlisting}[style=PythonDraculaWhite]
+# Imprime les nombres de 0 a 5. 
+for i in [0, 1, 2, 3, 4, 5]:
+    print(i)
+
+""" Output:
+0
+1
+2
+3
+4
+5
+"""
+# Alternative en utilisant range() pour alleger l'ecriture
+for i in range(6):
+    print(i)
+
+""" Output:
+0
+1
+2
+3
+4
+5
+"""
+# Cree une liste
+names = ["Harry", "Ron", "Hermione"]
+
+# Imprime chaque nom de la liste
+for name in names:
+    print(name)
+
+""" Output:
+Harry
+Ron
+Hermione
+"""
+
+Iterer sur une chaine de caractere :
+name = "Harry"
+for char in name:
+    print(char)
+
+""" Output:
+H
+a
+r
+r
+y
+"""
+\end{lstlisting}
+\end{EExample*}
+
+\section{Fonctions}
+\begin{EExample*}{Création de fonction}{}
+\begin{lstlisting}[style=PythonDraculaWhite]
+# Cette fonction prend comme argument un nombre et retourne son carre
+def square(x):
+    return x * x
+
+for i in range(10):
+    print(f"The square of {i} is {square(i)}")
+
+""" Output:
+The square of 0 is 0
+The square of 1 is 1
+The square of 2 is 4
+The square of 3 is 9
+The square of 4 is 16
+The square of 5 is 25
+The square of 6 is 36
+The square of 7 is 49
+The square of 8 is 64
+The square of 9 is 81
+"""
+\end{lstlisting}
+\end{EExample*}
+
+\section{Modules}
+\begin{note}
+Il est possible d'importer des fonctions contenu dans un fichier pour les utiliser dans un autre
+\end{note}
+
+\begin{EExample*}{Importer une fonction}{}
+\begin{lstlisting}[style=PythonDraculaWhite]
+# Contenu du fichier functions.py
+def square(x):
+    return x * x
+# ===============================================================================
+# Contenu fu fichier square.py
+
+from functions import square # Importe la fonction square du fichier functions.py
+for i in range(10):
+    print(f"The square of {i} is {square(i)}")
+
+# ===============================================================================
+# Alternative
+
+import functions # On importe le module au complet 
+for i in range(10):
+    print(f"The square of {i} is {functions.square(i)}")
+\end{lstlisting}
+\end{EExample*}
+
+\section{Programmation Orientée Objet}
+\begin{DefG*}{}{}
+Il s'agit d'un paradigme de programmation qui met de l'avant les objets qui peuvent 
+\textit{enregistrer de l'information et effectuer des actions}.
+\end{DefG*}
+\begin{DefG*}{Classes Python}{}
+Ce sont des types définit par le programmeur. C'est essentiellement le patron pour un nouveau
+type d'objet qui peut enregstrer de l'information et effectuer des actions. 
+\end{DefG*}
+
+\begin{codeEx*}{Créer une classe}{}
+\begin{lstlisting}[style=PythonDraculaWhite]
+class Point():
+    # A method defining how to create a point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+# Utilisation de la classe Point()
+p = Point(2, 8)
+print(p.x)
+print(p.y)
+
+""" Output:
+2
+8
+"""
+# =================================================================================
+class Flight():
+    # Methode qui cree un nouveau vol avec un capacite donnee
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.passengers = []
+
+    # Method qui ajoute un passager au vol
+    def add_passenger(self, name):
+        if not self.open_seats():
+            return False
+        self.passengers.append(name)
+        return True
+
+    # Methode qui retourne le nombre de places disponibles
+    def open_seats(self):
+        return self.capacity - len(self.passengers)
+# =================================================================================
+# Utilisation de la classe Flight()
+
+# Cree un nouveau vol avec capacite de 3 passagers
+flight = Flight(3)
+
+# Cree une liste de personnes
+people = ["Harry", "Ron", "Hermione", "Ginny"]
+
+# Tente d'ajoute chaque personne de la liste au vol
+for person in people:
+    if flight.add_passenger(person):
+        print(f"Added {person} to flight successfully")
+    else:
+        print(f"No available seats for {person}")
+
+""" Output:
+Added Harry to flight successfully
+Added Ron to flight successfully
+Added Hermione to flight successfully
+No available seats for Ginny
+"""
+\end{lstlisting}
+\end{codeEx*}
+
+\section{Programmation fonctionnelle}
+\begin{DefG*}{Programmation fonctionnelle}{}
+Paradigme de programmation où on traite chaque fonction comme n'importe quelle autre variable.
+\end{DefG*}
+\begin{EExample*}{}{}
+\begin{lstlisting}[style=PythonDraculaWhite]
+# On peut simplifier l'ecriture d'une fonction courte grace a lambda
+square = lambda x: x * x
+# =================================================================================
+# Organiser une liste de dictionnaire
+people = [
+{"name": "Harry", "house": "Gryffindor"},
+{"name": "Cho", "house": "Ravenclaw"},
+{"name": "Draco", "house": "Slytherin"}
+]
+
+def f(person):
+    return person["name"]
+
+people.sort(key=f)
+
+print(people)
+
+""" Output:
+[{'name': 'Cho', 'house': 'Ravenclaw'}, {'name': 'Draco', 'house': 'Slytherin'}, {'name': 'Harry', 'house': 'Gryffindor'}]
+"""
+# =================================================================================
+# Methode avec fonction lamda
+
+people = [
+    {"name": "Harry", "house": "Gryffindor"},
+    {"name": "Cho", "house": "Ravenclaw"},
+    {"name": "Draco", "house": "Slytherin"}
+]
+
+people.sort(key=lambda person: person["name"])
+
+print(people)
+
+""" Output:
+[{'name': 'Cho', 'house': 'Ravenclaw'}, {'name': 'Draco', 'house': 'Slytherin'}, {'name': 'Harry', 'house': 'Gryffindor'}]
+"""
+\end{lstlisting}
+\end{EExample*}
+%====================================================================
+% 
+%====================================================================
+\section{Exceptions}
+\begin{Syntaxe*}{Gestion des exceptions}{}
+Il arrive qu'on effectue des opérations qui lèvent une exception. On peut gérer ces instances avec un les commandes \entouree[gray]{\texttt{\footnotesize{try}}} et \entouree[gray]{\texttt{\footnotesize{excpet}}} 
+\end{Syntaxe*}
+\begin{EExample*}{Division par zéro}{}
+\begin{lstlisting}[style=PythonDraculaWhite]
+# Ce programme risque de lever une exception si le diviseur (y) est zero
+x = int(input("x: "))
+y = int(input("y: "))
+
+result = x / y
+# =================================================================================
+
+# L'alternative est un programme incorporant try et except.
+import sys
+
+x = int(input("x: "))
+y = int(input("y: "))
+
+try:
+    result = x / y
+except ZeroDivisionError:
+    print("Error: Cannot divide by 0.")
+    # Exit the program
+    sys.exit(1)
+
+print(f"{x} / {y} = {result}")
+
+
+
+print(f"{x} / {y} = {result}")
+\end{lstlisting}
+\end{EExample*}
+
+
+
+\end{document}
+
+
+
