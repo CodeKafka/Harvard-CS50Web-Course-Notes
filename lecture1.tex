@@ -1,0 +1,816 @@
+\documentclass{report}
+\input{npreamble}
+
+\title{\Huge{Harvard CS30W}\\HTML and CSS}
+\author{\huge{Franz Girardin}}
+\date{1 Mai 2023}
+\usepackage{framed}
+
+%====================================================================
+
+%====================================================================
+\begin{document}
+\maketitle
+
+\newpage
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+\pagebreak
+%====================================================================
+% 
+%====================================================================
+\chapter{HTML}
+\begin{DefG}{HTML \textit{Hypertext Markup Langage}}{}
+Langage de balisage qu'on utilise pour décrire la structure d'un document
+destiné à afficher une page web.
+\end{DefG}
+
+
+\begin{DefG}{Déclaration doctype}{}
+Formule qu'on utilise pour préciser la version de HTML utilisé dans la page qui suit : \texttt{\footnotesize{<!Doctype html>}}
+\end{DefG}
+
+
+\begin{Remarque*}{}{}
+Lorsqu'on précise \texttt{\footnotesize{html}} après !doctype ce signale au navigateur qu'on utilise le 
+standard HTML5 pour interpréter le contenu du document HTML. 
+\end{Remarque*}
+
+
+\begin{Syntaxe*}{En-tête \texttt{<head>}}{}
+Cette section contient des informations d'ordre générale concernant la page. Notamment, on y trouve le titre de la page : \texttt{\footnotesize{<title> </title>}} 
+\end{Syntaxe*}
+
+
+\begin{figure}[H]
+	\centering
+	\caption{Structure générale d'un document HTML}
+	\includegraphics[width=0.70\textwidth]{helloworld2} 
+\end{figure} 
+
+
+
+\begin{DefG}{DOM \textit{Document Object Model}}{}
+Structure qui permet de représenter les différents éléments d'une page web et la relation hiérarchique entre
+chacun 
+\end{DefG}
+
+
+
+\begin{figure}[H]
+	\centering
+	\caption{DOM d'un document HTML}
+	\includegraphics[width=0.35\textwidth]{DOMhtml} 
+\end{figure}
+
+
+\section{Listes HTML}
+\noindent Il est possible de créer des listes en faisant appel aux balises \entouree[gray]{\texttt{\footnotesize{<ol> </ol>}}} et \entouree[gray]{\texttt{\footnotesize{<ul> </ul>}}} qui créent des listes ordonnées et non ordonées, respectivement. Chaque élément d'une liste est introduit par la balise \entouree[gray]{\texttt{\footnotesize{<li></li>}}}. 
+
+
+\definecolor{shadecolor}{HTML}{282a36} 
+
+\begin{ExampleDdHTML*}{}{}
+  \begin{lstlisting}[style=HTMLDraculaDark]
+  <!DOCTYPE html>		<!-- Debut de la balise html contant la page web entiere -->
+  <html lang="en">
+	<head>
+		<title>Hello!</title>
+	</head>
+	<body>
+		An ordered List:
+		<ol>
+			<li>First Item</li>
+			<li>Second Item</li>
+			<li>Third Item</li>
+		</ol>
+	</body>
+  </html>
+  \end{lstlisting}
+\end{ExampleDdHTML*}
+
+
+
+\section{Images HTML}
+\noindent Il est possible d'inclure une image grâce à la balise \entouree[gray]{\texttt{\footnotesize{<img src="..." alt="...">}}}. L'attribut \entouree[gray]{\texttt{\footnotesize{src}}} prend comme argument le lien de l'image qu'on désire inclure. L'attribut \entouree[gray]{\texttt{\footnotesize{alt}}} prend comme argument un texte qui sera affiché
+si le navigateur \textit{n'arrive pas à afficher l'image}. 
+
+\begin{ExampleDdHTML*}{}{}
+  \begin{lstlisting}[style=HTMLDraculaDark]
+  <!DOCTYPE html>
+  <html lang="en">
+	<head>
+		<title>image</title>
+	</head>
+	<body>
+		<!-- Fournit le lien de l'image cat.jgp --> 
+		<img src="cat.jpg" alt="imageDeChat" width="300"> 
+	</body>
+  </html>
+  \end{lstlisting}
+\end{ExampleDdHTML*}
+
+\section{Liens HTML}
+\noindent Il est possible de partager des liens grâce à la balise \entouree[gray]{\texttt{\footnotesize{<a href="..."}></a>}}.
+La balise contient un text qui s'affichera comme un lien cliquable. 
+
+
+\begin{ExampleDdHTML*}{}{}
+  \begin{lstlisting}[style=HTMLDraculaDark]
+  <!DOCTYPE html>
+  <html lang="en">
+	<head>
+		<title>lien</title>
+	</head>
+	<body>
+		<!-- Fournit un lien vers la page google.com-->
+		<a href="https://google.com">Click Here</a>
+	</body>
+  </html>
+  \end{lstlisting}
+\end{ExampleDdHTML*}
+
+
+
+\section{Tableau HTML}
+\noindent Il est possible de générer un tableau grâce à la balise \entouree[gray]{\texttt{\footnotesize{<table></table>}}}. Cette balise est un contenant pour la balise \entouree[gray]{\texttt{\footnotesize{<thead></thead>}}} qui 
+permet de générer une \textit{en-tête} pour le tableau. Chaque élément de l'entête est introduit par
+\entouree[gray]{\texttt{\footnotesize{<th></th>}}}. On peut ensuite introduire les éléments du tableau grâce au 
+contenant \entouree[gray]{\texttt{\footnotesize{<tbody></tbody>}}}. Dans le corps du tableau, chaque rangée est
+introduite par \entouree[gray]{\texttt{\footnotesize{<tr></tr>}}}. On ajoute les éléments grâce à \entouree[gray]{\texttt{\footnotesize{<td></td>}}}
+\begin{ExampleDdHTML*}{}{}
+  \begin{lstlisting}[style=HTMLDraculaDark] 
+  <!DOCTYPE html>
+  <html lang="en">
+	<head>
+		<title>Tableau</title>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<thead>
+					<th>Ocean</th>
+					<th>Average Depth></th>
+					<th>Maximum Depth></th>
+				</thead>
+			</tr>
+
+			<tbody>
+				<tr>
+					<td>Pacific Ocean</td>
+					<td>4,280 m</td>
+					<td>10,911 m</td>
+				</tr>
+
+				<tr>
+					<td>Atlantic Ocean</td>
+					<td>3,4646 m</td>
+					<td>8,486 m</td>
+				<tr>
+				
+			</tbody>
+
+		</table>
+	</body>
+	</html>
+  \end{lstlisting}
+\end{ExampleDdHTML*}
+
+\section{Formulaire HTML}
+\noindent Il est possible de créer un formulaire qui donne l'oportunité à l'usager d'entrée des données. 
+La balise \entouree[gray]{\texttt{\footnotesize{<form></form>}}} introduit ce formulaire. L'entrée de données
+par l'utilisateur est rendu possible par l'usage de \entouree[gray]{\texttt{\footnotesize{<input type="text"}}}.
+Le \entouree[gray]{\texttt{\footnotesize{placeholder}}} est un indice visuel qui permet \ l'utilisateur de 
+comprendre la donnée qui lui est demandée. 
+
+
+\begin{ExampleDdHTML*}{}{}
+  \begin{lstlisting}[style=HTMLDraculaDark]  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Forms</title>
+</head>
+<body>
+    <form>
+        <input type="text" placeholder="First Name" name="first">
+        <input type="password" placeholder="Password" name="password">
+        <div>
+            Favorite Color:
+            <input name="color" type="radio" value="blue"> Blue
+            <input name="color" type="radio" value="green"> Green
+            <input name="color" type="radio" value="yellow"> Yellow
+            <input name="color" type="radio" value="red"> Red
+
+        </div>
+        <input type="submit">
+    </form>
+</body>
+</html>	 
+  \end{lstlisting}
+\end{ExampleDdHTML*}
+%====================================================================
+% 
+%====================================================================
+
+\chapter{CSS}
+\noindent Il est possible de modifier l'apparence ou \textit{le style} des éléments d'un document HTML grâce au langage CSS. L'une des façons de spécifier un style est d'utiliser l'attribut \entouree[gray]{\texttt{\footnotesize{style}}} d'une balise. Chaque style est un couple de \entouree[gray]{\texttt{\footnotesize{clé: valeur;}}}. 
+
+
+
+\begin{ExampleDdHTML*}{}{}
+  \begin{lstlisting}[style=HTMLDraculaDark]  
+  <!DOCTYPE html>
+  <html lang="en">
+	<head>
+		<title>Hello!</title>
+	</head>
+	<body>
+		<h1 style="color: blue; text-align: center;"> Welcome to my home page</h1>
+		Hello, world!
+	</body>
+	</html>
+  \end{lstlisting}
+\end{ExampleDdHTML*}
+\noindent Il est également possible de modifier le style en utilisant des balises 
+\entouree[gray]{\texttt{\footnotesize{<style></style>}}} dans une autre section du document
+
+
+\begin{ExampleDdHTML*}{}{}
+  \begin{lstlisting}[style=HTMLDraculaDark]  
+  <!DOCTYPE html>
+  <html lang="en">
+	<head>
+		<title>Hello!</title>
+		<style>
+			h1	{color: blue;
+				 text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<h1> Welcome to my home page</h1>
+		Hello, world!
+	</body>
+	</html>
+  \end{lstlisting}
+\end{ExampleDdHTML*}
+La troisième alternative est d'utiliser une feuille de style CSS et d'en fournir le lien dans le document HTML
+
+\begin{ExampleDdHTML*}{}{}
+  \begin{minipage}{.5\textwidth}
+  \begin{lstlisting}[style=HTMLDraculaDark]  
+  <!-- document1.html-->
+  <!DOCTYPE html>
+  <html lang="en">
+	<head>
+		<title>Hello!</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<h1>Welcome to my home page</h1>
+		<h1>This is another heading</h1>
+		Hello, world!
+	</body>
+	</html>
+  \end{lstlisting}
+  \end{minipage}
+
+   \begin{minipage}{.5\textwidth}
+	\begin{lstlisting}[style=HTMLDraculaDark]  
+	<!-- document1.css-->
+	h1    {color: blue;
+		   text-align: center;
+		   }
+	\end{lstlisting}
+\end{minipage}
+
+
+\end{ExampleDdHTML*}
+%====================================================================
+% 
+%====================================================================
+
+
+\chapter{Conception Réactive}
+\section{Concept de réactivité}
+\begin{DefG*}{Responsive Design}
+	Un design réactif permet l'affichage optimale d'un page web, indépendamment de l'outil utilisé
+	pour la consulter. Le design est réactif lorsqu'il s'adapte au \textit{viewport}—la portion visible de la page. 
+
+\end{DefG*}
+\begin{note}
+Par défaut, les téléphones intelligents réduisent l'espace que prennent chaque éléments, pour présenter 
+l'entièreté de la page telle qu'elle serait visible sur un écran d'ordinateur. 
+\end{note}
+
+
+
+\begin{Syntaxe*}{Modification du \textit{viewport}}{}
+La commande \texttt{\footnotesize{<meta name="viewport" content="width=device-widht, initial-scale=1.0">}} permet d'ajuster les dimensions du \textit{viewport} à la largeur de l'écran. 
+\end{Syntaxe*}
+
+
+\section{Media Queries}
+\noindent Ce sont des commandes qui permettent de contrôler l'apparence de la page en manipulant des paramètres de 
+taille et de présentation. Dans l'exemple suivant, on modifie l'apparence de la page en fonction de la taille de 
+l'écran de l'utilisateur. 
+
+
+\begin{ExampleDdHTML*}{Changement de la couleur en fonction de la taille de l'écran}{}
+\begin{lstlisting}[style=HTMLDraculaDark]  
+  <!DOCTYPE html>
+  <html lang="en">
+	<head>
+		<title>Changement de couleur</title>
+
+		
+		<style>
+		<!--Ce query change la couleur de fond si la largeur de l'ecran est >= 600px-->
+	
+			@media (min-width: 600px) {
+			body {
+				background-color: red;
+				}
+			}
+		<!-- Ce query change la couleur de fond si la largeur de l'ecran est <= 599 px-->
+		@media (max-widthL 599px) {
+		body {
+			background-color: blue;
+			}
+		}
+		</style>
+	</head>
+	<body>
+		<h1>Welcome to my web page !</h1>
+	</body>
+  </html>
+\end{lstlisting}
+\end{ExampleDdHTML*}
+
+\begin{Remarque*}{Créer un \textit{Media Query}}{}
+Chaque media query est introduit par \texttt{\footnotesize{@media}} suivit d'une expression entre parenthèses. Dans
+les parenthèses, on spécifie pour quel genre de media on veut appliquer le \textit{query}. Ce qui suit l'expression
+entre parenthèse est une expression entre crochets qui spécifie le \textit{query}. 
+\end{Remarque*}
+
+
+
+
+
+\section{Flexbox}
+\begin{Syntaxe*}{Flexbox}{}
+L'utilisation de \textit{flexbox} peut être pertinente lorsqu'on désire présenter plusieurs éléments 
+sur une page et que ces éléments pourraient sortir du champ de la page si on ne conçoit pas un design réactif. 
+\end{Syntaxe*}
+
+\begin{ExampleDdHTML*}{}{}
+  \begin{lstlisting}[style=HTMLDraculaDark]  
+  <!DOCTYPE html>
+  <html lang="en">
+	<head>
+		<title>Hello!</title>
+		<style>
+			#container {
+			    <!--indique qu'on veut affiche les elements a l'interieur 
+				de container en mode flex-->	
+				display: flex;
+
+
+				<!-- indique qu'on veut que les elements "wrap"; s'il n'y a 
+				pas suffisammment d'espace
+				sur une ligne, placer les prochains elements dans le container 
+				sur la ligne suivante. 
+				flex-wrap: wrap;
+				}
+			
+			<!-- selectionne tous les elements div qui sont enfant du container-->
+			#container > div {
+				background-color: springgreen;
+				font-size: 20px;
+				margin: 20px;
+				padding: 20px;
+				width: 200px;
+			}
+	</head>
+	<body>
+		<div id="container">
+			<div class="grid-item"></div>
+			<div>1.This is some sample text inside of div to demo Flexbox.</div>
+			<div>2.This is some sample text inside of div to demo Flexbox.</div>
+			<div>3.This is some sample text inside of div to demo Flexbox.</div>
+			<div>4.This is some sample text inside of div to demo Flexbox.</div>
+		</div>
+	</body>
+	</html>
+  \end{lstlisting}
+\end{ExampleDdHTML*}
+
+
+
+\begin{Remarque}{Créer un \textit{flexbox}}{}
+Les éléments qu'on désire contrôler par \textit{flexbox} doivent être placé à l'extérieur d'un 
+\texttt{\footnotesize{<div> </div>}}. On donne à ce div un  \texttt{\footnotesize{id}} qu'on pourra sélectionner
+lorsqu'on modifiera son style. 
+\end{Remarque}
+
+
+
+
+\section{Grid}
+\begin{Syntaxe*}{Grid}{}
+L'utilisation de grid est pertinente lorsqu'on veut organiser les éléments en grilles. 
+\end{Syntaxe*}
+
+
+\begin{ExampleDdHTML*}{}{}
+  \begin{lstlisting}[style=HTMLDraculaDark] 
+  <!DOCTYPE html>
+  <html lang="en">
+	<head>
+		<title>Hello!</title>
+		<style>
+			#grid {
+			    <!--indique qu'on veut affiche les elements a l'interieur 
+				de container en mode grid-->	
+				display: grid;
+
+
+				<!-- indique l'espace qu'on veut entre chaque element de la grille 
+				grid-column-gap: 20px;
+				grid-row-gap: 10px;
+
+				grid-template-columns: 200px 200px auto;
+				}
+			
+			<!-- selectionne tous les elements div qui faisant parti de la classe "grid-item"-->
+			.grid-item {
+				background-color: white;
+				font-size: 20px
+				padding: 20px
+				text-align: center;
+
+
+			}
+	</head>
+	<body>
+		<div id="container">
+			<div class="grid-item">1. Un element</div>
+			<div class="grid-item">2. Un element</div>
+			<div class="grid-item">3. Un element</div>
+
+			<div class="grid-item">1. Un element</div>
+			<div class="grid-item">2. Un element</div>
+			<div class="grid-item">3. Un element</div>	
+			
+		</div>
+	</body>
+	</html>
+  \end{lstlisting}
+\end{ExampleDdHTML*}
+
+\begin{Remarque}{Créer un \textit{grid}}{}
+Les éléments qu'on désire contrôle par \textit{grid} sont placé dans un \texttt{\footnotesize{<div> </div>}}. 
+On donne à ce div un id qu'on pourra sélectionner. La commande \texttt{\footnotesize{grid-template-column}} 
+permet de préciser la quantité de colonnes et la largeur de chaqcune de celles-ci. Lorsqu'on spécifie "auto",
+la colonne prend tous \textit{l'espace restant disponible}. 
+
+\end{Remarque}
+
+
+
+
+
+\section{Bootstrap}
+\begin{note}
+Bootstrap est une librairie qui contient des styles pour modifier l'apparence de certains éléments, 
+simplement en référençant le CSS et sans avoir à définir le style soit-même. 
+
+\end{note}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{bootstrap}
+	
+\end{figure}
+
+\begin{Syntaxe*}{Référencer bootstrap}{}
+Pour utiliser bootstrap il faut, dans le document html concerné, fournir un lien référant à la librairie 
+boostrap : \texttt{\footnotesize{<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4>}}
+
+\end{Syntaxe*}
+\noindent Sur le site de bootstrap, on peut trouver une panoplie de composantes. Pour obtenir le style d'une composante de 
+notre choix, il suffit d'attribuer à l'élément désiré la classe correspondante. 
+
+\begin{DefG*}{Boostrap Column Model}{}
+	Système d'organisation des éléments utilisé par boostrat pour s'assurer que la page web soit réactive.
+	Boostrap divise une page en sections où chaque rangée est divisé en colonnes de 12 unités.
+\end{DefG*}
+\begin{Remarque*}{Fonctionnement de Bootstrap}{}
+One popular bootstrap feature is their grid system. Bootstrap automatically splits a page into 12 columns, and we can decide how many columns an element takes up by adding the class col-x where x is a number between 1 and 12. For example, in the following page, we have a row of columns of equal width, and then a row where the center column is larger:
+\end{Remarque*}
+\begin{ExampleDdHTML*}{}{}
+  \begin{lstlisting}[style=HTMLDraculaDark] 
+  <html lang="en">
+    <head>
+        <title>My Web Page!</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <style>
+            .row > div {
+                padding: 20px;
+                background-color: teal;
+                border: 2px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    This is a section.
+                </div>
+                <div class="col-4">
+                    This is another section.
+                </div>
+                <div class="col-4">
+                    This is a third section.
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    This is a section.
+                </div>
+                <div class="col-6">
+                    This is another section.
+                </div>
+                <div class="col-3">
+                    This is a third section.
+                </div>
+            </div>
+        </div>
+    </body>
+</html>  \end{lstlisting}
+\end{ExampleDdHTML*}
+
+\begin{note}
+Le système boostrap gère l'apparence des éléments lorsque la fenêtre est modifiée. 	
+En modifiant la taille de la fenêtre, les colonnes se comportent de façon réactive; la taille de chaque colonne
+sera ajustée pour qu'elles apparaissent toutes sur la même ligne.
+\end{note}
+\begin{Remarque*}{Taille de colonnne en fonction de la taille de l'écran}{}
+To improve mobile-responsiveness, bootstrap also allows us to specify column sizes that differ depending on the screen size. In the following example, we use col-lg-3 to show that an element should take up 3 columns on a large screen, and col-sm-6 to show an element should take up 6 columns when the screen is small:
+\end{Remarque*}
+
+\begin{ExampleDdHTML*}{}{}
+\begin{lstlisting}[style=HTMLDraculaDark]
+	<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>My Web Page!</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <style>
+            .row > div {
+                padding: 20px;
+                background-color: teal;
+                border: 2px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    This is a section.
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    This is another section.
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    This is a third section.
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    This is a fourth section.
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+\end{lstlisting}
+\end{ExampleDdHTML*}
+
+%====================================================================
+% 
+%====================================================================
+
+
+\chapter{SASS}
+\section{Création de SASS}
+\begin{DefG}{SCSS}{}
+	Il s'agit d'un langage qui est une extansion de CSS. SCCS possède toutes les fonctionnalités de CSS et plus encoere—notamment, la possibilité de créer des variables.
+\end{DefG}
+
+
+\begin{Syntaxe*}{Création d'un fichier SASS}{}
+Les fichiers SASS ont comme extansion \texttt{\footnotesize{.scss}} au lieu de \texttt{\footnotesize{CSS}}.  
+Chaque variable débute avec le symbole \texttt{\footnotesize{\$}}
+\end{Syntaxe*}
+
+ 
+
+
+\begin{ExampleDdHTML*}{}{}
+  \begin{lstlisting}[style=HTMLDraculaDark] 
+  <!--Fichier HTML-->
+  <!DOCTYPE html>
+  <html lang="en">
+	<head>
+		<title>Formulaire</title>
+		<link rel="stylesheet" href="variable.scss">	
+		<style>
+			.row > div {
+				padding: 20px;
+				background-color: teal;
+				border:2px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-3">This is a section</div>
+				<div class="col-3">This is another section</div>
+				<div class="col-3">This is a third section</div>
+			</div>
+		</div>
+	</body>
+  </html>
+\end{lstlisting}
+
+\begin{lstlisting}[style=CSSDraculaDark] 
+  /* Fichier SASS */
+  $variable:red; 
+  /* on assigne la couleur rouge a la virable "variable" */ 	
+  ul {
+		font-size:14px;
+		color:variable;	/* On utilise la variable "variable" pour donner une couleur rouge au texte contenu dans <ul> */ 
+  }
+  ul {
+		font-size:18px;
+		color:variable;
+  }
+  \end{lstlisting}
+\end{ExampleDdHTML*}
+
+
+\section{Compilation de SCSS}
+\noindent 
+Le navigateur ne comprends pas le langage SCSS. Lorsqu'on écrit le code CSS, il faut le compiler en CSS. Dans le
+terminal on peut utiliser la commande \texttt{\footnotesize{sass nomFichier.scss:nomFichierFin.css}} où 
+\texttt{\footnotesize{nomFichier}} est le bom du fichier scsss et 
+\texttt{\footnotesize{nomFichierVer}} est le nom du fichier final vers lequel on veut faire la conversion 
+
+\begin{Remarque*}{Recompilation du fichier SCSS}{}
+Après chaque modification du fichier SCSS, il faut le compiler à nouveau pour que les changements soient appliqués.
+Lorsqu'on travail à partir du terminal, on peut utiliser la commande \texttt{\footnotesize{--watch nomFichier.scss:nomFichierVer.css}} pour que la compilation se fasse automatiquement.  
+\end{Remarque*}
+
+
+
+\section{Simplification de la sélection d'éléments}
+\begin{Syntaxe*}{Sélecteur simplifié}{}
+	Il est possible der simplifier la sélection d'élément structurant les éléments dans le fichier SCSS
+	pour mettre en évidance la relation entre les éléments. Dans l'exemple suivant, seuls les éléments \entouree[gray]{\texttt{\footnotesize{p}}} et \entouree[gray]{\texttt{\footnotesize{ul}}} qui sont dans un 
+	\entouree[gray]{\texttt{\footnotesize{div}}} sont modifié.
+\end{Syntaxe*}
+
+
+\begin{ExampleDdHTML*}{}{}
+  \begin{lstlisting}[style=CSSDraculaDark]
+  /* Fichier SASS : organisation heriarchique facilitant la selection */
+div {
+    font-size: 18px;
+
+    p {
+        color: blue;
+    }
+
+    ul {
+        color: green;
+    }
+}
+  \end{lstlisting}
+    \begin{lstlisting}[style=CSSDraculaDark]
+  
+  /* Fichier CSS correspondant : addition automatique des selecteur en s'insipirant de la hirerachie dictee par SASS */
+div {
+    font-size: 18px;
+}
+
+div p {
+    color: blue;
+}
+
+div ul {
+    color: green;
+}
+	\end{lstlisting}
+
+\end{ExampleDdHTML*}
+
+
+
+\section{Héritage}
+\noindent Il est possible de donner des propriétés à certains éléments et de faire en sorte que d'autres éléments héritent
+de ces propriétés. L'exemple suivant montre que tous les éléments \entouree[gray]{\texttt{\footnotesize{success}}}
+héritent des propriétés de la classe \entouree[gray]{\texttt{\footnotesize{message}}}. 
+
+
+\begin{ExampleDdHTML*}{}{}
+  \begin{lstlisting}[style=CSSDraculaDark] 
+    %message {
+		font-family:sans-serif;
+		font-size:18px;
+		font-weight:bold;
+		border:1px solid black;
+		padding:20px;
+		margin:20px;
+	}
+
+	success {
+		@extend %message;	  /* success herite des proprietes de message */
+		background-color: green;
+	}\end{lstlisting}
+\end{ExampleDdHTML*}
+
+
+
+\begin{ExampleDdHTML*}{Résumé des principales balises}{}
+\begin{lstlisting}[style=HTMLDraculaDark]
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>HTML Elements</title>
+    </head>
+    <body>
+        <!-- We can create headings using h1 through h6 as tags. -->
+        <h1>A Large Heading</h1>
+        <h2>A Smaller Heading</h2>
+        <h6>The Smallest Heading</h6>
+
+        <!-- The strong and i tags give us bold and italics respectively. -->
+        A <strong>bold</strong> word and an <i>italicized</i> word!
+
+        <!-- We can link to another page (such as cs50's page) using a. -->
+        View the <a href="https://cs50.harvard.edu/">CS50 Website</a>!
+
+        <!-- We used ul for an unordered list and ol for an ordered one. both ordered and unordered lists contain li, or list items. -->
+        An unordered list:
+        <ul>
+            <li>foo</li>
+            <li>bar</li>
+            <li>baz</li>
+        </ul>
+        An ordered list:
+        <ol>
+            <li>foo</li>
+            <li>bar</li>
+            <li>baz</li>
+        </ol>
+
+        <!-- Images require a src attribute, which can be either the path to a file on your computer or the link to an image online. It also includes an alt attribute, which gives a description in case the image can't be loaded. -->
+        An image:
+        <img src="../../images/duck.jpeg" alt="Rubber Duck Picture">
+        <!-- We can also see above that for some elements that don't contain other ones, closing tags are not necessary. -->
+
+        <!-- Here, we use a br tag to add white space to the page. -->
+        <br/> <br/>
+
+        <!-- A few different tags are necessary to create a table. -->
+        <table>
+            <thead>
+                <th>Ocean</th>
+                <th>Average Depth</th>
+                <th>Maximum Depth</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Pacific</td>
+                    <td>4280 m</td>
+                    <td>10911 m</td>
+                </tr>
+                <tr>
+                    <td>Atlantic</td>
+                    <td>3646 m</td>
+                    <td>8486 m</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+<html>	
+\end{lstlisting}
+\end{ExampleDdHTML*}
+
+\end{document}
